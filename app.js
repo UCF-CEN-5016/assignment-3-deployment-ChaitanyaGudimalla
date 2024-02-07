@@ -1,27 +1,35 @@
-const express = require('express')
-const fetch = require('node-fetch')
-const app = express()
-const port = 3000
+const express = require('express');
+const app = express();
 
-const cities = ["Orlando", "Winter Park", "Oviedo", "Maitland"];
+// Define jokes and punchlines
+const jokes = [
+  { setup: "Why don't scientists trust atoms?", punchline: "Because they make up everything!" },
+  { setup: "What did one plate say to the other plate?", punchline: "Dinner is on me!" }
+];
 
-const populations = [309154, 29131, 39559, 18959];
+// Joke endpoints
+app.get('/joke1', (req, res) => {
+  res.send(jokes[0].setup);
+});
 
-async function test(){
-console.log("test");
-}
+app.get('/joke2', (req, res) => {
+  res.send(jokes[1].setup);
+});
 
-//This is the base endpoint
-app.get('/', (req, res) => {
-  res.send('Hello World!')
-})
+// Punchline endpoints
+app.get('/punchline1', (req, res) => {
+  res.send(`${jokes[0].setup} ${jokes[0].punchline}`);
+});
 
-app.get('/cities', (req, res) => {
-  return res.json(cities)
-})
+app.get('/punchline2', (req, res) => {
+  res.send(`${jokes[1].setup} ${jokes[1].punchline}`);
+});
 
-app.get('/populations', (req, res) => {
-  return res.json(populations)
-})
+// Random joke endpoint
+app.get('/joke', (req, res) => {
+  const randomIndex = Math.floor(Math.random() * jokes.length);
+  const randomJoke = jokes[randomIndex];
+  res.send(`${randomJoke.setup} ${randomJoke.punchline}`);
+});
 
 module.exports = app;
