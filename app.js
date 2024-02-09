@@ -1,5 +1,7 @@
-const express = require('express');
-const app = express();
+const express = require('express')
+const fetch = require('node-fetch')
+const app = express()
+const port = 3000
 
 // Define cities and populations
 const cities = ["Orlando", "Winter Park", "Oviedo", "Maitland"];
